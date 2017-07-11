@@ -6,15 +6,23 @@
 	$op 			= $_GET['op'];
 
 	if($op=="in"){
-		$query = "SELECT * FROM tb_user WHERE id_user='".$id_user."' AND password='".$password."'";
+		//$query = "SELECT * FROM tb_user WHERE id_user='".$id_user."' AND password='".$password."'";
+		$query = "
+			SELECT tb_user.id_user, tb_user.nip, tb_pegawai.nama, tb_user.password, tb_user.hak_akses, tb_user.aktif
+			FROM tb_user
+			INNER JOIN tb_pegawai
+			ON tb_user.nip = tb_pegawai.nip
+			WHERE tb_user.id_user = '".$id_user."'
+			AND tb_user.password = '".$password."';
+		";
+
 		$sql = mysqli_query($con, $query);
-		/*$sql = mysql_query("SELECT * FROM tb_user WHERE id_user='$id_user' AND password='$password'");*/
 		if(mysqli_num_rows($sql)==1){
 			$qry = mysqli_fetch_array($sql);
 			$_SESSION['id_user'] = $qry['id_user'];
-			$_SESSION['nama_user'] = $qry['nama_user'];
 			$_SESSION['hak_akses'] = $qry['hak_akses'];
-			
+			$_SESSION['nama'] = $qry['nama'];
+
 			if($qry['aktif']=="N"){
             echo "<div class='register-logo'><b>Oops!</b> User Tidak Aktif.</div>	
 				<div class='register-box-body'>
@@ -52,6 +60,7 @@
 	}else if($op=="out"){
 		unset($_SESSION['id_user']);
 		unset($_SESSION['hak_akses']);
+		unset($_SESSION['nama']);
 		header("location:index.php");
 	}
 ?>

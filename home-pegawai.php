@@ -80,7 +80,7 @@ if($_SESSION['hak_akses']!="Pegawai"){
 						<ul class="dropdown-menu">
 							<li class="user-header">
 								<img src='dist/img/profile/no-image.jpg' class='img-circle' alt='User Image'>
-								<p>Welcome - <?php echo $_SESSION['nama_user'] ?><small><?php echo $_SESSION['hak_akses'] ?></small></p>
+								<p>Welcome - <?php echo $_SESSION['nama'] ?><small><?php echo $_SESSION['hak_akses'] ?></small></p>
 							</li>
 							<li class="user-body">
 								<div class="row">
