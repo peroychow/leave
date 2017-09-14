@@ -1,19 +1,19 @@
-<section` class="content-header">
-    <h1>Approved<small>Cuti</small></h1>
+<section class="content-header">
+    <h1>Approved<small>Leave</small></h1>
     <ol class="breadcrumb">
         <li><a href="home-hrd.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Approved Cuti</li>
+        <li class="active">Approved Leave</li>
     </ol>
 </section>
 <div class="register-box">
 
 	<?php
 		
-		if (isset($_GET['no_cuti']) AND ($_GET['nip']) AND ($_GET['jml_hari']) AND ($_GET['jenis'])) {
-		$no_cuti	= $_GET['no_cuti'];
-		$nip 		= $_GET['nip'];
-		$jml_hari	= $_GET['jml_hari'];
-		$jenis		= $_GET['jenis'];
+		if (isset($_GET['id_leave']) AND ($_GET['id_number']) AND ($_GET['days']) AND ($_GET['leave_type'])) {
+		$id_leave	= $_GET['id_leave'];
+		$id_number 	= $_GET['id_number'];
+		$days		= $_GET['days'];
+		$leave_type	= $_GET['leave_type'];
 		}
 		else{
 			die ("Error. No ID Selected! ");	
@@ -21,19 +21,21 @@
 	
 		include "dist/koneksi.php";
 		
-		if ($jenis == 'Cuti Tahun') {
-			$setuju = "
-				UPDATE tb_mohoncuti SET persetujuan='DISETUJUI' WHERE no_cuti='$no_cuti'
+		if ($leave_type == 1) {
+			$approved = "
+				UPDATE table_leave_request SET approval='Y' WHERE id_leave='$id_leave'
 			";
-			$query=mysqli_query($con, $setuju);
-			$hakUpdate = "
-				UPDATE tb_pegawai SET hak_cuti_tahunan = hak_cuti_tahunan - '$jml_hari' WHERE nip='$nip'
+			$query=mysqli_query($con, $approved);
+			$remainUpdate = "
+				UPDATE table_employee SET remaining_leave = remaining_leave - '$days' WHERE id_number='$id_number'
 			";
-			$query2 = mysqli_query($con, $hakUpdate);
+			$query2 = mysqli_query($con, $remainUpdate);
 		}
 		else {
-			$setuju = "UPDATE tb_mohoncuti SET persetujuan='DISETUJUI' WHERE no_cuti='$no_cuti'";
+			/* Belum mau di taruh query, spece untuk mengambil pilihan diluar dari annual leave */
+			/*$setuju = "UPDATE tb_mohoncuti SET persetujuan='DISETUJUI' WHERE no_cuti='$no_cuti'";
 			$query = mysqli_query ($con, $setuju);		
+			*/
 		}
 	?>
 

@@ -1,29 +1,33 @@
 <div class="login-box">
 <?php
 	include "dist/koneksi.php";
-	$id_user		= $_POST['id_user'];
+	//$id_user		= $_POST['id_user'];
+	$id_number		= $_POST['id_number'];
 	$password		= $_POST['password'];
+	$passwdenc		= md5($password);
 	$op 			= $_GET['op'];
 
 	if($op=="in"){
-		//$query = "SELECT * FROM tb_user WHERE id_user='".$id_user."' AND password='".$password."'";
-		$query = "
-			SELECT tb_user.id_user, tb_user.nip, tb_pegawai.nama, tb_user.password, tb_user.hak_akses, tb_user.aktif
-			FROM tb_user
-			INNER JOIN tb_pegawai
-			ON tb_user.nip = tb_pegawai.nip
-			WHERE tb_user.id_user = '".$id_user."'
-			AND tb_user.password = '".$password."';
+		
+		$newquery = "
+			SELECT users.id_user, users.id_number, table_employee.name, table_employee.email, users.password, table_access.name AS access, users.active
+			FROM users
+			INNER JOIN table_employee
+			ON users.id_number = table_employee.id_number
+			INNER JOIN table_access
+			ON users.access = table_access.id_access
+			WHERE table_employee.email = '".$id_number."'
+			AND users.password = '".$passwdenc."';
 		";
 
-		$sql = mysqli_query($con, $query);
+		$sql = mysqli_query($con, $newquery);
 		if(mysqli_num_rows($sql)==1){
 			$qry = mysqli_fetch_array($sql);
-			$_SESSION['id_user'] = $qry['id_user'];
-			$_SESSION['hak_akses'] = $qry['hak_akses'];
-			$_SESSION['nama'] = $qry['nama'];
+			$_SESSION['id_number'] = $qry['id_number'];
+			$_SESSION['hak_akses'] = $qry['access'];
+			$_SESSION['nama'] = $qry['name'];
 
-			if($qry['aktif']=="N"){
+			if($qry['active']=="N"){
             echo "<div class='register-logo'><b>Oops!</b> User Tidak Aktif.</div>	
 				<div class='register-box-body'>
 					<p>Harap tunggu beberapa saat, atau silahkan hubungi Admin Anda.</p>
@@ -35,13 +39,13 @@
 					</div>
 				</div>";
 			}
-			else if($qry['hak_akses']=="Admin"){
+			else if($qry['access']==Admin){
 				header("location:home-admin.php");
 			}
-			else if($qry['hak_akses']=="Pegawai"){
+			else if($qry['access']==Employee){
 				header("location:home-pegawai.php");
 			}
-			else if($qry['hak_akses']=="HRD"){
+			else if($qry['access']==HR){
 				header("location:home-hrd.php");
 			}
 		}
@@ -58,8 +62,8 @@
 				</div>";
 		}
 	}else if($op=="out"){
-		unset($_SESSION['id_user']);
-		unset($_SESSION['hak_akses']);
+		unset($_SESSION['id_number']);
+		unset($_SESSION['access']);
 		unset($_SESSION['nama']);
 		header("location:index.php");
 	}

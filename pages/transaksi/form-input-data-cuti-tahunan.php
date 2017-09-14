@@ -1,5 +1,5 @@
 <section class="content-header">
-    <h1>Data<small>Cuti Tahunan</small></h1>
+    <h1>Annual Leave<small>Data</small></h1>
     <ol class="breadcrumb">
         <li><a href="home-hrd.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
         <li class="active">Data Cuti Tahunan</li>
@@ -7,28 +7,7 @@
 </section>
 <?php
 	include "dist/koneksi.php";
-		//fungsi kode otomatis
-		function kdauto($tabel, $inisial){
-		$struktur   = mysqli_query($con, "SELECT * FROM $tabel");
-		$field      = mysql_field_name($struktur,0);
-		$panjang    = mysql_field_len($struktur,0);
-		$qry  = mysql_query("SELECT max(".$field.") FROM ".$tabel);
-		$row  = mysql_fetch_array($qry);
-		if ($row[0]=="") {
-		$angka=0;
-		}
-		else {
-		$angka= substr($row[0], strlen($inisial));
-		}
-		$angka++;
-		$angka      =strval($angka);
-		$tmp  ="";
-		for($i=1; $i<=($panjang-strlen($inisial)-strlen($angka)); $i++) {
-		$tmp=$tmp."0";
-		}
-		return $inisial.$tmp.$angka;
-		}
-	$tampilPeg=mysqli_query($con, "SELECT * FROM tb_pegawai ORDER BY nip");
+	$showEmployee = mysqli_query($con, "SELECT id_number, name, remaining_leave FROM table_employee");
 ?>
 <section class="content">
     <div class="row">
@@ -38,7 +17,7 @@
 					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								 <h4 class="panel-title"><i class="fa fa-plus"></i> Add Data Cuti Tahunan<a data-toggle="collapse" data-target="#formaddcuti" href="#formaddcuti" class="collapsed"></a></h4>
+								 <h4 class="panel-title"><i class="fa fa-plus"></i> Add Annual Leave to Employee<a data-toggle="collapse" data-target="#formaddcuti" href="#formaddcuti" class="collapsed"></a></h4>
 							</div>
 							<div id="formaddcuti" class="panel-collapse collapse">
 								<div class="panel-body">
@@ -47,13 +26,13 @@
 											<label class="col-sm-3 control-label">Jumlah Cuti Tahunan</label>
 											<div class="col-sm-3">
 												<?php 
-													$data = mysqli_query($con, "SELECT * FROM tb_pegawai");
+													$data = mysqli_query($con, "SELECT * FROM table_employee");
 												?>
-													<select name="nip" onchange="changeValue(this.value)" class="form-control">
-														<option value="">Pilih NIP</option>
+													<select name="id_number" onchange="changeValue(this.value)" class="form-control">
+														<option value="">Select NIP</option>
 														<?php
 															while ($row = mysqli_fetch_array($data)) {   
-													echo '<option value="'.$row['nip'].'">'. $row['nip'].' - '.$row['nama'].'</option>';    
+													echo '<option value="'.$row['id_number'].'">'. $row['id_number'].' - '.$row['name'].'</option>';    
 															}    
 														?>
 													</select>
@@ -76,18 +55,18 @@
 						<thead>
 							<tr>
 								<th>NIP</th>
-								<th>Nama</th>
-								<th>Sisa Hak Cuti Tahunan</th>
+								<th>Name</th>
+								<th>Remaining Leave</th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
-							while($peg=mysqli_fetch_array($tampilPeg)){
+							while($peg=mysqli_fetch_array($showEmployee)){
 						?>	
 							<tr>
-								<td><?php echo $peg['nip'];?></td>
-								<td><?php echo $peg['nama'];?></td>
-								<td><?php echo $peg['hak_cuti_tahunan'];?> Hari</td>
+								<td><?php echo $peg['id_number'];?></td>
+								<td><?php echo $peg['name'];?></td>
+								<td><?php echo $peg['remaining_leave'];?> Hari</td>
 							</tr>
 						<?php
 							}

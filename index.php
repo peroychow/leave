@@ -44,11 +44,12 @@ session_start();
 <body class="hold-transition skin-red fixed sidebar-mini">
 <div class="wrapper">
 	<header class="main-header">
-		<a href="index.php" class="logo"><span class="logo-mini">CUTI</span><span class="logo-lg"><b>Cuti</b> BRUH</span></a>
+		<a href="index.php" class="logo"><span class="logo-mini">QHA</span><span class="logo-lg">Qareer Group Asia</span></a>
 		<nav class="navbar navbar-static-top" role="navigation">
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span></a>
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
+				<!--
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src='dist/img/profile/no-image.jpg' class='user-image' alt='User Image'>
@@ -67,6 +68,7 @@ session_start();
 							</li>
 						</ul>
 					</li>
+				-->
 				</ul>
 			</div>
 		</nav>
@@ -84,7 +86,7 @@ session_start();
 	</div>
 	<footer class="main-footer">
 		<div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
-		Copyright &copy; 2016 <a href="#" target="_blank">cuti ONLINE</a>. All rights reserved
+		Copyright &copy; 2017 <a href="#" target="_blank">peroychow</a>. All rights reserved
 	</footer>
 </div>
 	<!-- ./wrapper -->

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['id_user'])){
+if(!isset($_SESSION['id_number'])){
     die("<b>Oops!</b> Access Failed.
 		<p>Sistem Logout. Anda harus melakukan Login kembali.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");
@@ -56,7 +56,7 @@ if($_SESSION['hak_akses']!="Admin"){
 <body class="hold-transition skin-red fixed sidebar-mini">
 <div class="wrapper">
 	<header class="main-header">
-		<a href="home-admin.php" class="logo"><span class="logo-mini">CUTI</span><span class="logo-lg"><b>Cuti</b> BRUH</span></a>
+		<a href="home-admin.php" class="logo"><span class="logo-mini">QHA</span><span class="logo-lg">Qareer Group Asia</span></a>
 		<nav class="navbar navbar-static-top" role="navigation">
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span></a>
 			<div class="navbar-custom-menu">
@@ -64,7 +64,7 @@ if($_SESSION['hak_akses']!="Admin"){
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src='dist/img/profile/no-image.jpg' class='user-image' alt='User Image'>
-							<span class="hidden-xs">Aplikasi Pengajuan Cuti Online</span> &nbsp;<i class="fa fa-angle-down"></i>
+							<span class="hidden-xs"><?php echo $_SESSION['nama'] ?></span> &nbsp;<i class="fa fa-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu">
 							<li class="user-header">
@@ -97,7 +97,7 @@ if($_SESSION['hak_akses']!="Admin"){
 				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Master Data</span><i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
 						<li><a href="home-admin.php?page=form-master-user"> <i class="fa fa-caret-right"></i> User</a></li>
-						<li><a href="home-admin.php?page=form-master-pegawai"> <i class="fa fa-caret-right"></i> Pegawai</a></li>
+						<li><a href="home-admin.php?page=form-master-pegawai"> <i class="fa fa-caret-right"></i> Employee</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -126,7 +126,7 @@ if($_SESSION['hak_akses']!="Admin"){
 	</div>
 	<footer class="main-footer">
 		<div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
-		Copyright &copy; 2016 <a href="#" target="_blank">cuti ONLINE</a>. All rights reserved
+		Copyright &copy; 2017 <a href="#" target="_blank">peroychow</a>. All rights reserved
 	</footer>
 </div>
 	<!-- ./wrapper -->

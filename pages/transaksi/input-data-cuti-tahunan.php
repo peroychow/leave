@@ -8,10 +8,10 @@
 <div class="register-box">
 <?php	
 	if ($_POST['save'] == "save") {
-	$nip				=$_POST['nip'];
-	$hak_cuti_tahunan	=$_POST['hak_cuti_tahunan'];
+	$id_number	= $_POST['id_number'];
+	$hak_cuti_tahunan =$_POST['hak_cuti_tahunan'];
 	
-		if (empty($_POST['nip']) || empty($_POST['hak_cuti_tahunan'])) {
+		if (empty($_POST['id_number']) || empty($_POST['hak_cuti_tahunan'])) {
 		echo "<div class='register-logo'><b>Oops!</b> Data Tidak Lengkap.</div>
 			<div class='box box-primary'>
 				<div class='register-box-body'>
@@ -28,7 +28,7 @@
 		
 		else{
 		include "dist/koneksi.php";
-		$updateHak = "UPDATE tb_pegawai SET hak_cuti_tahunan=hak_cuti_tahunan + $hak_cuti_tahunan WHERE nip='$nip'";
+		$updateHak = "UPDATE table_employee SET remaining_leave=remaining_leave + $hak_cuti_tahunan WHERE id_number='$id_number'";
 		$query = mysqli_query($con, $updateHak);
 		
 		if($query){

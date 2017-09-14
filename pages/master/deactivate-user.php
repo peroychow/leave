@@ -7,15 +7,15 @@
 </section>
 <div class="register-box">
 <?php
-	if (isset($_GET['id_user'])) {
-	$id_user	= $_GET['id_user'];
+	if (isset($_GET['id_number'])) {
+		$id_number	= $_GET['id_number'];
 	}
 	else{
 		die ("Error. No ID Selected! ");	
 	}
 	
 	include "dist/koneksi.php";
-	$deactivate = "UPDATE tb_user SET aktif='N' WHERE id_user='$id_user'";
+	$deactivate = "UPDATE users SET active='N' WHERE id_number='$id_number'";
 	$query = mysqli_query ($con, $deactivate);		
 		if($query){
 		echo "<div class='register-logo'><b>Deactivate</b> User!</div>	
@@ -25,7 +25,7 @@
 					<div class='col-xs-8'></div>
 					<div class='col-xs-4'>
 						<div class='box-body box-profile'>
-							<a class='btn btn-primary btn-block' href='home-admin.php?page=form-master-user'>OK</a>
+							<a class='btn btn-primary btn-block' href='home-admin.php?page=form-master-u	ser'>OK</a>
 						</div>
 					</div>
 				</div>

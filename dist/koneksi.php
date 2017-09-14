@@ -7,7 +7,7 @@
 		if (!$Koneksi){
 		die ("Koneksi ke Database Gagal !");
 	}*/
-	$con = mysqli_connect("localhost","root","","db_cuti");
+	$con = mysqli_connect("localhost","root","","leave_report");
 
 	// Check connection
 	if (mysqli_connect_errno())

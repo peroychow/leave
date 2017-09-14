@@ -1,13 +1,14 @@
 <div class="login-box">
 	<div class="login-logo">
-		<a href="index.php"><b>cuti</b> ae BRUH</a>
+		<a href="index.php">Leave Request App</a>
 	</div>
 	<div class="box box-primary">
 		<div class="login-box-body">
 			<p class="login-box-msg">Login To Access Your Autorization</p>
 			<form action="index.php?page=act-login&op=in" method="POST">
 				<div class="form-group has-feedback">
-					<input type="text" name="id_user" class="form-control" placeholder="User Name"><span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<!--berikan id_number-->
+					<input type="text" name="id_number" class="form-control" placeholder="User Name"><span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" name="password" class="form-control" placeholder="Password"><span class="glyphicon glyphicon-lock form-control-feedback"></span>

@@ -1,11 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['id_user'])){
+if(!isset($_SESSION['id_number'])){
     die("<b>Oops!</b> Access Failed.
 		<p>Sistem Logout. Anda harus melakukan Login kembali.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");
 }
-if($_SESSION['hak_akses']!="HRD"){
+if($_SESSION['hak_akses']!="HR"){
     die("<b>Oops!</b> Access Failed.
 		<p>Anda Bukan HRD.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");
@@ -55,38 +55,46 @@ if($_SESSION['hak_akses']!="HRD"){
 </head>
 <?php
 	include "dist/koneksi.php";
-	$tampilCuti=mysqli_query($con, "
-		SELECT tb_mohoncuti.no_cuti, tb_pegawai.nama, tb_mohoncuti.tgl, tb_mohoncuti.dari, tb_mohoncuti.sampai, tb_mohoncuti.jml_hari, tb_mohoncuti.jenis, tb_mohoncuti.persetujuan
+
+	$showLeaveRequest = mysqli_query($con, "
+		SELECT * from table_leave_request where approval is NULL
+	");
+	$leaveRequest = mysqli_num_rows($showLeaveRequest);
+	/* Query disini blm terpakai
+
+	$showLeave=mysqli_query($con, "
+		SELECT tb_mohoncuti.no_cuti, tb_pegawai.nama, tb_mohoncuti.tgl, tb_mohoncuti.dari, tb_mohoncuti.sampai, tb_mohoncuti.jml_hari, tb_mohoncuti.jenis, tb_mohoncuti.persetujuan, tb_mohoncuti.alasan
 		FROM tb_mohoncuti
 		INNER JOIN tb_pegawai
 		ON tb_mohoncuti.nip = tb_pegawai.nip
 		WHERE tb_mohoncuti.persetujuan = ''
 	");
-	$jmlcut=mysqli_num_rows($tampilCuti);
+	$jmlcut=mysqli_num_rows($showLeave);
+	*/
 ?>
 <body class="hold-transition skin-red fixed sidebar-mini">
 <div class="wrapper">
 	<header class="main-header">
-		<a href="home-hrd.php" class="logo"><span class="logo-mini">CUTI</span><span class="logo-lg"><b>Cuti</b> BRUH</span></a>
+		<a href="home-hrd.php" class="logo"><span class="logo-mini">QHA</span><span class="logo-lg"> Qareer Group Asia</span></a>
 		<nav class="navbar navbar-static-top" role="navigation">
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span></a>
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<li class="dropdown messages-menu">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-inbox"></i><span class="label label-warning"><?=$jmlcut?></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-inbox"></i><span class="label label-warning"><?=$leaveRequest?></span></a>
 						<ul class="dropdown-menu">
-							<li class="header">Anda memiliki <?=$jmlcut?> permohonan cuti</li>
+							<li class="header">Anda memiliki <?=$leaveRequest?> permohonan cuti</li>
 						</ul>
 					</li>
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src='dist/img/profile/no-image.jpg' class='user-image' alt='User Image'>
-							<span class="hidden-xs">Aplikasi Pengajuan Cuti Online</span> &nbsp;<i class="fa fa-angle-down"></i>
+							<span class="hidden-xs"><?php echo $_SESSION['nama'] ?></span> &nbsp;<i class="fa fa-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu">
 							<li class="user-header">
 								<img src='dist/img/profile/no-image.jpg' class='img-circle' alt='User Image'>
-								<p>Welcome - <?php echo $_SESSION['nama'] ?><small><?php echo $_SESSION['hak_akses'] ?></small></p>
+								<p>- <?php echo $_SESSION['nama'] ?> -<small><?php echo $_SESSION['hak_akses'] ?></small></p>
 							</li>
 							<li class="user-body">
 								<div class="row">
@@ -112,7 +120,7 @@ if($_SESSION['hak_akses']!="HRD"){
 				<li class="header">MAIN NAVIGATION</li>
 				<li class="treeview"><a href="home-hrd.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
 				<li class="treeview"><a href="home-hrd.php?page=form-input-data-cuti-tahunan"><i class="fa fa-book"></i> <span>Input Data Cuti Tahunan</span></a></li>
-				<li class="treeview"><a href="home-hrd.php?page=pre-approval-cuti"><i class="fa fa-gear"></i> <span>Approval Cuti</span><small class="label pull-right bg-yellow"><?=$jmlcut?></small></a></li>
+				<li class="treeview"><a href="home-hrd.php?page=pre-approval-cuti"><i class="fa fa-gear"></i> <span>Approval Cuti</span><small class="label pull-right bg-yellow"><?=$leaveRequest?></small></a></li>
 				<li class="treeview"><a href="home-hrd.php?page=history-cuti-hrd"><i class="fa fa-exchange"></i> <span>History</span></a></li>
 			</ul>
 		</section>
@@ -136,7 +144,7 @@ if($_SESSION['hak_akses']!="HRD"){
 	</div>
 	<footer class="main-footer">
 		<div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
-		Copyright &copy; 2016 <a href="#" target="_blank">cuti ONLINE</a>. All rights reserved
+		Copyright &copy; 2017 <a href="#" target="_blank">peroychow</a>. All rights reserved
 	</footer>
 </div>
 	<!-- ./wrapper -->

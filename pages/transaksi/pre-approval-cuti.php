@@ -1,8 +1,8 @@
 <section class="content-header">
-    <h1>Pre Approval<small>Cuti</small></h1>
+    <h1>Pre Approval<small>Leave</small></h1>
     <ol class="breadcrumb">
         <li><a href="home-hrd.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Approval Cuti</li>
+        <li class="active">Leave Approval</li>
     </ol>
 </section>
 <section class="content">
@@ -13,13 +13,13 @@
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>No. Cuti</th>
-								<th>Nama</th>
-								<th>Tgl Pengajuan</th>
-								<th>Jumlah Hari</th>
-								<th>Dari Tanggal</th>
-								<th>Sampai Tanggal</th>
-								<th>Jenis Cuti</th>
+								<th>Name</th>
+								<th>Date Request</th>
+								<th>Days</th>
+								<th>Date From</th>
+								<th>Date To</th>
+								<th>Leave Type</th>
+								<th>Propose</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -28,24 +28,24 @@
 							include "dist/koneksi.php";
 							$tampilCuti=mysqli_query($con, "
 
-								SELECT tb_mohoncuti.no_cuti, tb_mohoncuti.nip, tb_pegawai.nama, tb_mohoncuti.tgl, tb_mohoncuti.dari, tb_mohoncuti.sampai, tb_mohoncuti.jml_hari, tb_mohoncuti.jenis, tb_mohoncuti.persetujuan
-								FROM tb_mohoncuti
-								INNER JOIN tb_pegawai
-								ON tb_mohoncuti.nip = tb_pegawai.nip
-								WHERE tb_mohoncuti.persetujuan = ''
+								SELECT table_leave_request.id_leave, table_leave_request.id_number, table_employee.name, table_leave_request.date_request, table_leave_request.date_from, table_leave_request.date_to, table_leave_request.days, table_leave_request.leave_type, table_leave_request.approval, table_leave_request.purpose
+								FROM table_leave_request
+								INNER JOIN table_employee
+								ON table_leave_request.id_number = table_employee.id_number
+								WHERE table_leave_request.approval is NULL
 							");
 
 							while($history=mysqli_fetch_array($tampilCuti)){
 						?>	
 							<tr>
-								<td><?php echo $history['no_cuti'];?></td>
-								<td><?php echo $history['nama'];?></td>
-								<td><?php echo $history['tgl'];?></td>
-								<td><?php echo $history['jml_hari'];?></td>
-								<td><?php echo $history['dari'];?></td>
-								<td><?php echo $history['sampai'];?></td>
-								<td><?php echo $history['jenis'];?></td>
-								<td class="tools"><a href="home-hrd.php?page=form-approval-cuti&no_cuti=<?=$history['no_cuti'];?>&nip=<?=$history['nip'];?>&jml_hari=<?=$history['jml_hari'];?>&jenis=<?=$history['jenis'];?>" title="approval"><i class="fa fa-check"></i></a></td>
+								<td><?php echo $history['name'];?></td>
+								<td><?php echo $history['date_request'];?></td>
+								<td><?php echo $history['days'];?></td>
+								<td><?php echo $history['date_from'];?></td>
+								<td><?php echo $history['date_to'];?></td>
+								<td><?php echo $history['leave_type'];?></td>
+								<td><?php echo $history['purpose'];?></td>
+								<td class="tools"><a href="home-hrd.php?page=form-approval-cuti&id_leave=<?=$history['id_leave'];?>&id_number=<?=$history['id_number'];?>&days=<?=$history['days'];?>&leave_type=<?=$history['leave_type'];?>" title="approval"><i class="fa fa-check"></i></a></td>
 							</tr>
 						<?php
 							}

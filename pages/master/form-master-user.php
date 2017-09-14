@@ -7,18 +7,28 @@
 </section>
 <?php
 	include "dist/koneksi.php";
-	$tampilUser=mysqli_query($con, "
-		SELECT tb_user.id_user, tb_user.nip, tb_pegawai.nama, tb_user.password, tb_user.hak_akses, tb_user.aktif 
-		FROM tb_user
-		INNER JOIN tb_pegawai
-		ON tb_user.nip = tb_pegawai.nip
-		ORDER BY tb_user.id_user;
+
+	$showUsers = mysqli_query($con, "
+		SELECT table_employee.`id_number` AS id_employee, table_employee.name, users.password, table_access.name AS access, users.active
+		FROM users
+		INNER JOIN table_employee
+		ON users.id_number = table_employee.id_number
+		INNER JOIN table_access
+		ON users.access = table_access.id_access;
+	");
+
+	$selectEmployee = mysqli_query($con, "
+		SELECT id_number, name FROM table_employee;
+	");
+
+	$getAccess = mysqli_query($con, "
+		SELECT * FROM table_access;
 	");
 ?>
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-			<div class="box box-primary">				
+			<div class="box box-primary">
 				<div class="box-body">
 					<div class="panel-group">
 						<div class="panel panel-default">
@@ -29,35 +39,35 @@
 								<div class="panel-body">
 									<form action="home-admin.php?page=master-user" class="form-horizontal" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
-											<label class="col-sm-3 control-label">ID User</label>
+											<label class="col-sm-3 control-label">Employee Name</label>
 											<div class="col-sm-7">
-												<input type="text" name="id_user" class="form-control" placeholder="Username" maxlength="64">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">NIP</label>
-											<div class="col-sm-7">
-
-												<input type="text" name="nip" class="form-control" placeholder="NIP" maxlength="20">
-
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">Password</label>
-											<div class="col-sm-7">
-												<input type="text" name="password" class="form-control" placeholder="Password" maxlength="64">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">Hak Akses</label>
-											<div class="col-sm-7">
-												<select name="hak_akses" class="form-control">
-													<option value="">Pilih</option>
-													<option value="Admin">Admin</option>
-													<option value="HRD">HRD</option>
+												<select name="id_employee" class="form-control">
+													<?php
+														while($selectName=mysqli_fetch_array($selectEmployee)){
+													?>
+														<option value="<?php echo $selectName['id_number']; ?>"><?php echo $selectName['name']; ?></option>
+													<?php
+														}
+													?>
 												</select>
 											</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Access</label>
+											<div class="col-sm-7">
+												<select name="hak_akses" class="form-control">
+													<?php
+														while($selectAccess=mysqli_fetch_array($getAccess)){
+													?>
+														<option value="<?php echo $selectAccess['id_access']; ?>"><?php echo $selectAccess['name']; ?></option>
+													<?php
+														}
+													?>
+												</select>
+											</div>
+										</div>
+
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-7">
 												<button type="submit" name="save" value="save" class="btn btn-danger">Save</button>
@@ -73,8 +83,7 @@
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>ID User</th>
-								<th>NIP</th>
+								<th>ID Employee</th>
 								<th>Nama</th>
 								<th>Password</th>
 								<th>Hak Akses</th>
@@ -84,16 +93,15 @@
 						</thead>
 						<tbody>
 						<?php
-							while($user=mysqli_fetch_array($tampilUser)){
-						?>	
+							while($user=mysqli_fetch_array($showUsers)){
+						?>
 							<tr>
-								<td><?php echo $user['id_user'];?></td>
-								<td><?php echo $user['nip'];?></td>
-								<td><?php echo $user['nama'];?></td>
+								<td><?php echo $user['id_employee'];?></td>
+								<td><?php echo $user['name'];?></td>
 								<td><?php echo $user['password'];?></td>
-								<td><?php echo $user['hak_akses'];?></td>
-								<td><?php echo $user['aktif'];?></td>
-								<td align="center"><a href="home-admin.php?page=pre-activated-deactivate-user&id_user=<?=$user['id_user'];?>&aktif=<?=$user['aktif'];?>" title="Activated OR Deactivate"><i class="fa  fa-refresh"></i></a></td>
+								<td><?php echo $user['access'];?></td>
+								<td><?php echo $user['active'];?></td>
+								<td align="center"><a href="home-admin.php?page=pre-activated-deactivate-user&id_number=<?=$user['id_employee'];?>&aktif=<?=$user['active'];?>" title="Activated OR Deactivate"><i class="fa  fa-refresh"></i></a></td>
 							</tr>
 						<?php
 							}

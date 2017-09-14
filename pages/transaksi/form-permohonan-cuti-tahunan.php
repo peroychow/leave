@@ -1,44 +1,72 @@
 <section class="content-header">
-    <h1>Form<small>Cuti Tahunan</small></h1>
+    <h1>Form<small>Annual Leave</small></h1>
     <ol class="breadcrumb">
         <li><a href="home-pegawai.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Form Cuti Tahunan</li>
+        <li class="active">Leave Request Form</li>
     </ol>
 </section>
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
+				<hr/>
 				<form action="home-pegawai.php?page=permohonan-cuti-tahunan" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<div class="box-body">
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Dari Tanggal</label>
+							<label class="col-sm-3 control-label">Leave Date</label>
 							<div class="col-sm-4">
 								<div class="input-group date form_date col-sm-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-									<input type="text" name="dari" class="form-control"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									<input type="text" name="date_from" class="form-control"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Sampe Tanggal</label>
+							<label class="col-sm-3 control-label">To </label>
 							<div class="col-sm-4">
 								<div class="input-group date form_date col-sm-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-									<input type="text" name="sampai" class="form-control"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									<input type="text" name="date_to" class="form-control"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 								</div>
 							</div>
 						</div>
-						<div class="form-group has-feedback">
-							<label class="col-sm-3 control-label">Jenis Cuti</label>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Phone </label>
 							<div class="col-sm-4">
-								<select name="jenis" class="form-control" disabled="disabled">
-									<option selected>Cuti Tahun</option>
-								</select>
+								<input type="text" class="form-control" name="contact" id="contact"/>
 							</div>
 						</div>
-						<br /><br /><br />
+
+						<div class="form-group has-feedback">
+							<label class="col-sm-3 control-label">Type of Leave </label>
+							<div class="col-sm-2">
+								<div class="radio">
+									<label><input type="radio" name="leave_type" value="1" checked="checked">Annual Leave</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="leave_type" value="2" disabled="disabled">Unpaid Leave</label>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="radio">
+									<label><input type="radio" name="leave_type" value="3" disabled="disabled">Special Leave</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="leave_type" value="4" disabled="disabled">Advance Leave</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group has-feedback">
+							<label class="col-sm-3 control-label">Purpose of Leave </label>
+							<div class="col-sm-4">
+								<textarea class="form-control" rows="5" name="purpose" id="purpose"></textarea>
+							</div>
+						</div>
+
+						<br />
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-7">
-								<button type="submit" name="save" value="save" class="btn btn-danger">Kirim</button>
+								<button type="submit" name="save" value="save" class="btn btn-danger">Send</button>
 							</div>
 						</div>
 					</div>

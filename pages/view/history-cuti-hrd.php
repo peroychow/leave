@@ -1,8 +1,8 @@
 <section class="content-header">
-    <h1>History<small>Cuti</small></h1>
+    <h1>Leave<small>History</small></h1>
     <ol class="breadcrumb">
         <li><a href="home-hrd.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">History Cuti</li>
+        <li class="active">Leave History</li>
     </ol>
 </section>
 <section class="content">
@@ -13,39 +13,38 @@
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>No. Cuti</th>
-								<th>Nama</th>
-								<th>NIP</th>
-								<th>Tgl Pengajuan</th>
-								<th>Jumlah Hari</th>
-								<th>Dari Tanggal</th>
-								<th>Sampai Tanggal</th>
-								<th>Jenis Cuti</th>
-								<th>Persetujuan</th>
+								<th>Name</th>
+								<th>ID Number</th>
+								<th>Date Request</th>
+								<th>Days</th>
+								<th>Date From</th>
+								<th>Date To</th>
+								<th>Leave Type</th>
+								<th>Purpose</th>
+								<th>Approval</th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
 							include "dist/koneksi.php";
-							$tampilCuti=mysqli_query($con, "
-								SELECT tb_mohoncuti.no_cuti, tb_pegawai.nama, tb_mohoncuti.nip, tb_mohoncuti.tgl, tb_mohoncuti.dari, tb_mohoncuti.sampai, tb_mohoncuti.jml_hari, tb_mohoncuti.jenis, tb_mohoncuti.persetujuan
-								FROM tb_mohoncuti
-								INNER JOIN tb_pegawai
-								ON tb_mohoncuti.nip = tb_pegawai.nip
-								ORDER BY tb_mohoncuti.no_cuti;
+							$showLeave=mysqli_query($con, "
+								SELECT table_leave_request.id_leave, table_employee.name, table_leave_request.id_number, table_leave_request.date_request, table_leave_request.date_from, table_leave_request.date_to, table_leave_request.days, table_leave_request.leave_type, table_leave_request.approval, table_leave_request.purpose
+								FROM table_leave_request
+								INNER JOIN table_employee
+								ON table_leave_request.id_number = table_employee.id_number
 							");
-							while($history=mysqli_fetch_array($tampilCuti)){
+							while($history=mysqli_fetch_array($showLeave)){
 						?>	
 							<tr>
-								<td><?php echo $history['no_cuti'];?></td>
-								<td><?php echo $history['nama'];?></td>
-								<td><?php echo $history['nip'];?></td>
-								<td><?php echo $history['tgl'];?></td>
-								<td><?php echo $history['jml_hari'];?></td>
-								<td><?php echo $history['dari'];?></td>
-								<td><?php echo $history['sampai'];?></td>
-								<td><?php echo $history['jenis'];?></td>
-								<td><?php echo $history['persetujuan'];?></td>
+								<td><?php echo $history['name'];?></td>
+								<td><?php echo $history['id_number'];?></td>
+								<td><?php echo $history['date_request'];?></td>
+								<td><?php echo $history['days'];?></td>
+								<td><?php echo $history['date_from'];?></td>
+								<td><?php echo $history['date_to'];?></td>
+								<td><?php echo $history['leave_type'];?></td>
+								<td><?php echo $history['purpose'];?></td>
+								<td><?php echo $history['approval'];?></td>
 							</tr>
 						<?php
 							}

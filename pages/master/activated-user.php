@@ -7,15 +7,15 @@
 </section>
 <div class="register-box">
 <?php
-	if (isset($_GET['id_user'])) {
-	$id_user	= $_GET['id_user'];
+	if (isset($_GET['id_number'])) {
+	$id_number	= $_GET['id_number'];
 	}
 	else{
 		die ("Error. No ID Selected! ");	
 	}
 	
 	include "dist/koneksi.php";
-	$activated = "UPDATE tb_user SET aktif='Y' WHERE id_user='$id_user'";
+	$activated = "UPDATE users SET active='Y' WHERE id_number='$id_number'";
 	$query = mysqli_query ($con, $activated);		
 		if($query){
 		echo "<div class='register-logo'><b>Activated</b> User!</div>	
