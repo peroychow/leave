@@ -19,6 +19,7 @@
 								<th>Date From</th>
 								<th>Date To</th>
 								<th>Leave Type</th>
+								<th>Purpose</th>
 								<th>Approval</th>
 							</tr>
 						</thead>
@@ -37,6 +38,7 @@
 								<td><?php echo $history['date_from'];?></td>
 								<td><?php echo $history['date_to'];?></td>
 								<td><?php echo $history['leave_type'];?></td>
+								<td><?php echo $history['purpose'];?></td>
 								<td><?php echo $history['approval'];?></td>
 							</tr>
 						<?php

@@ -5,7 +5,7 @@ if(!isset($_SESSION['id_number'])){
 		<p>Sistem Logout. Anda harus melakukan Login kembali.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");
 }
-if($_SESSION['hak_akses']!="Employee"){
+if($_SESSION['hak_akses']=="Employee" & $_SESSION['hak_akses']=="Admin"){
     die("<b>Oops!</b> Access Failed.
 		<p>Anda Bukan Pegawai.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");

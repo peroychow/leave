@@ -100,6 +100,13 @@ if($_SESSION['hak_akses']!="Admin"){
 						<li><a href="home-admin.php?page=form-master-pegawai"> <i class="fa fa-caret-right"></i> Employee</a></li>
 					</ul>
 				</li>
+				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Leave Request</span><i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="home-admin.php?page=form-permohonan-cuti-tahunan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Annual</a></li>
+						<li><a href="home-admin.php?page=form-permohonan-cuti-umum">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Special</a></li>
+					</ul>
+				</li>
+				<li class="treeview"><a href="home-admin.php?page=history-cuti-pegawai"><i class="fa fa-exchange"></i> <span>History</span></a></li>
 			</ul>
 		</section>
 	</aside>
@@ -119,6 +126,9 @@ if($_SESSION['hak_akses']!="Admin"){
 					case 'delete-data-pegawai': include "pages/master/delete-data-pegawai.php"; break;
 					case 'edit-data-pegawai': include "pages/master/edit-data-pegawai.php"; break;
 					case 'form-lihat-data-pegawai': include "pages/master/form-lihat-data-pegawai.php"; break;
+					case 'form-permohonan-cuti-tahunan': include "pages/transaksi/form-permohonan-cuti-tahunan.php"; break;
+					case 'permohonan-cuti-umum': include "pages/transaksi/permohonan-cuti-umum.php"; break;
+					case 'history-cuti-pegawai': include "pages/view/history-cuti-pegawai.php"; break;
 					default : include 'dashboard.php';	
 				}
 			?>

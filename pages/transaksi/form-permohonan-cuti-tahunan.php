@@ -1,3 +1,13 @@
+<?php
+	$id_number = $_SESSION['id_number'];
+	include "dist/koneksi.php";
+
+	$query = mysqli_query($con, "
+		SELECT * FROM users WHERE id_number = '$id_number'
+	");
+	$takeAccess = mysqli_fetch_array($query);
+?>
+
 <section class="content-header">
     <h1>Form<small>Annual Leave</small></h1>
     <ol class="breadcrumb">
@@ -10,7 +20,18 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<hr/>
-				<form action="home-pegawai.php?page=permohonan-cuti-tahunan" class="form-horizontal" method="POST" enctype="multipart/form-data">
+				<?php
+					if($takeAccess['access']==1) { 
+					echo "
+						<form action='home-admin.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
+					";
+					}
+					else if($takeAccess['access']==4) {
+					echo "
+						<form action='home-pegawai.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
+					";
+					}
+				?>
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Leave Date</label>
