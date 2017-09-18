@@ -49,10 +49,23 @@
 	$takeEmployee = mysqli_query($con, "SELECT * FROM table_employee WHERE id_number='$id_number'");
 	$result = mysqli_fetch_array($takeEmployee);
 		$id_number = $result['id_number'];
+
+	$checkAccess = mysqli_query($con, 
+			"SELECT table_employee.id_number, table_employee.name, table_access.name AS access
+			FROM users
+			INNER JOIN table_employee
+			ON users.id_number = table_employee.id_number
+			INNER JOIN table_access
+			ON users.access = table_access.id_access
+			WHERE users.id_number = '$id_number';"
+		);
+
+	$accessCheck = mysqli_fetch_array($checkAccess);
+	$accessID = $accessCheck['access'];
 ?>
 
 <section class="content-header">
-	<h1>Pengaturan <small>Employee</small></h1>
+	<h1>Settings <small>Employee</small></h1>
 	<ol class="breadcrumb">
 		<li><a href="home-pegawai.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
 		<li class="active">Edit User</li>
@@ -64,15 +77,23 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-body">
-					<p>Box-Body1</p>
 					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title"><i class="fa fa-plus"></i> Ubah data personal<a data-toggle="collapse" data-target="#editdata" href="#editdata" class="collapsed"></a></h4>
+								<h4 class="panel-title"><i class="fa fa-plus"></i> Update Personal Data<a data-toggle="collapse" data-target="#editdata" href="#editdata" class="collapsed"></a></h4>
 							</div>
 							<div id="editdata" class="panel-collapse collapse">
 								<div class="panel-body">
-									<form action="home-pegawai.php?page=edit-data-pegawai&id_number=<?=$id_number?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+
+									<?php 
+										if($accessID=='Admin') {
+											echo '
+												<form action="home-pegawai.php?page=edit-data-pegawai&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
+											';
+										}
+									?>
+
+									<!--<form action="home-pegawai.php?page=edit-data-pegawai&id_number=<?=$id_number?>" class="form-horizontal" method="POST" enctype="multipart/form-data">-->
 										<div class="form-group">
 											<label class="col-sm-3 control-label">ID Number</label>
 											<div class="col-sm-7">
@@ -445,7 +466,7 @@
 
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-7">
-												<button type="submit" name="edit" value="edit" class="btn btn-danger">Edit</button>
+												<center><button type="submit" name="edit" value="edit" class="btn btn-danger">Update</button></center>
 											</div>
 										</div>
 
@@ -456,11 +477,10 @@
 					</div>
 				</div>
 				<div class="box-body">
-					<p>Box-Body2</p>
 					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title"><i class="fa fa-plus"></i> Ubah password login<a data-toggle="collapse" data-target="#editpasswd" href="#editpasswd" class="collapsed"></a></h4>
+								<h4 class="panel-title"><i class="fa fa-plus"></i> Update Password<a data-toggle="collapse" data-target="#editpasswd" href="#editpasswd" class="collapsed"></a></h4>
 							</div>
 							<div id="editpasswd" class="panel-collapse collapse">
 								<div class="panel-body">
@@ -491,7 +511,7 @@
 										</div>
 										<div class="form-group">
 											<div class="col-sm-offset-3 col-sm-7">
-												<button type="submit" name="edit" value="edit" class="btn btn-danger">Ubah</button>
+												<center><button type="submit" name="edit" value="edit" class="btn btn-danger">Update</button></center>
 											</div>
 										</div>
 									</form>

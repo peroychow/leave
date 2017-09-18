@@ -77,7 +77,7 @@ if($_SESSION['hak_akses']!="Admin"){
 							</li>
 							<li class="user-footer">
 								<div class="pull-left">
-									<?php echo date("d-m-Y");?>
+									<a href="home-admin.php?page=form-setting-user&id_number=<?php echo $_SESSION['id_number'] ?>" class="btn btn-default btn-flat">Settings</a>
 								</div>
 								<div class="pull-right">
 								  <a href="pages/login/act-logout.php" class="btn btn-default btn-flat">Log out</a>
@@ -129,6 +129,7 @@ if($_SESSION['hak_akses']!="Admin"){
 					case 'form-permohonan-cuti-tahunan': include "pages/transaksi/form-permohonan-cuti-tahunan.php"; break;
 					case 'permohonan-cuti-umum': include "pages/transaksi/permohonan-cuti-umum.php"; break;
 					case 'history-cuti-pegawai': include "pages/view/history-cuti-pegawai.php"; break;
+					case 'form-setting-user': include "pages/master/form-setting-user.php"; break;
 					default : include 'dashboard.php';	
 				}
 			?>

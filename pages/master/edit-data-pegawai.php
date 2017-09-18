@@ -13,27 +13,6 @@
 	else {
 		die ("Error. No Kode Selected! ");	
 	}
-	include "dist/koneksi.php";
-	
-	$takeEmployee = mysqli_query($con, "SELECT * FROM table_employee WHERE id_number='$id_number'");
-	$result = mysqli_fetch_array($takeEmployee);
-
-	$checkAccess = mysqli_query($con, 
-		"SELECT table_employee.`id_number`, users.`access`
-		FROM table_employee
-		INNER JOIN users
-		ON table_employee.id_number = users.`id_number`;
-		WHERE table_employee.id_number = '$id_number'"
-	);
-	
-	$access = mysqli_fetch_array($checkAccess);
-	echo $access['access'];
-	if($access['access']==1) {
-		$action = "home-admin.php?page=form-master-pegawai";
-	}
-	else {
-		$action = "home-pegawai.php";
-	}
 
 	if ($_POST['edit'] == "edit") {
 		$name								= $_POST['name'];
@@ -136,6 +115,28 @@
 				reporting_to='$reporting_to'
 			WHERE id_number='$id_number'");
 		if($update){
+			include "dist/koneksi.php";
+
+			$checkAccess = mysqli_query($con, 
+				"SELECT table_employee.id_number, table_employee.name, table_access.name AS access
+				FROM users
+				INNER JOIN table_employee
+				ON users.id_number = table_employee.id_number
+				INNER JOIN table_access
+				ON users.access = table_access.id_access
+				WHERE users.id_number = '$id_number';"
+			);
+
+			$result = mysqli_fetch_array($checkAccess);
+			$accessID = $result['access'];
+			
+			if($accessID == 'Admin') {
+				$action = "home-admin.php";
+			}
+			else {
+				$action = "home-pegawai.php";
+			}
+
 			echo "<div class='register-logo'><b>Edit</b> Successful!</div>	
 				<div class='register-box-body'>
 					<p>Edit Employee ".$id_number." Success</p>
