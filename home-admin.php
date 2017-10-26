@@ -130,6 +130,7 @@ if($_SESSION['hak_akses']!="Admin"){
 					case 'permohonan-cuti-umum': include "pages/transaksi/permohonan-cuti-umum.php"; break;
 					case 'history-cuti-pegawai': include "pages/view/history-cuti-pegawai.php"; break;
 					case 'form-setting-user': include "pages/master/form-setting-user.php"; break;
+					case 'edit-password': include "pages/master/edit-password.php"; break;
 					default : include 'dashboard.php';	
 				}
 			?>

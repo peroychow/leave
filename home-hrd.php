@@ -119,9 +119,27 @@ if($_SESSION['hak_akses']!="HR"){
 			<ul class="sidebar-menu">
 				<li class="header">MAIN NAVIGATION</li>
 				<li class="treeview"><a href="home-hrd.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
-				<li class="treeview"><a href="home-hrd.php?page=form-input-data-cuti-tahunan"><i class="fa fa-book"></i> <span>Input Data Cuti Tahunan</span></a></li>
-				<li class="treeview"><a href="home-hrd.php?page=pre-approval-cuti"><i class="fa fa-gear"></i> <span>Approval Cuti</span><small class="label pull-right bg-yellow"><?=$leaveRequest?></small></a></li>
+				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Master Data</span><i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="home-hrd.php?page=form-master-user">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> User</a></li>
+						<li><a href="home-hrd.php?page=form-master-pegawai">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Employee</a></li>
+					</ul>
+				</li>
+				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Leave Request</span><i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="home-hrd.php?page=form-permohonan-cuti-tahunan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Annual</a></li>
+						<li><a href="home-hrd.php?page=form-permohonan-cuti-umum">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Special</a></li>
+					</ul>
+				</li>
+				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Leave Input Employee</span><i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="home-hrd.php?page=form-input-data-cuti-tahunan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i>Input Leave an Employee</a></li>
+						<li><a href="home-hrd.php?page=form-permohonan-cuti-bersama">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i>Input Joint Holiday</a></li>
+					</ul>
+				</li>
+				<li class="treeview"><a href="home-hrd.php?page=pre-approval-cuti"><i class="fa fa-gear"></i> <span>Leave Apporval</span><small class="label pull-right bg-yellow"><?=$leaveRequest?></small></a></li>
 				<li class="treeview"><a href="home-hrd.php?page=history-cuti-hrd"><i class="fa fa-exchange"></i> <span>History</span></a></li>
+
 			</ul>
 		</section>
 	</aside>
@@ -137,7 +155,21 @@ if($_SESSION['hak_akses']!="HR"){
 					case 'approved-cuti': include "pages/transaksi/approved-cuti.php"; break;
 					case 'not-approved-cuti': include "pages/transaksi/not-approved-cuti.php"; break;
 					case 'history-cuti-hrd': include "pages/view/history-cuti-hrd.php"; break;
-					default : include 'dashboard.php';	
+					case 'form-permohonan-cuti-tahunan': include "pages/transaksi/form-permohonan-cuti-tahunan.php"; break;
+					case 'form-permohonan-cuti-bersama': include "pages/transaksi/form-permohonan-cuti-bersama.php"; break;
+					case 'permohonan-cuti-bersama': include "pages/transaksi/permohonan-cuti-bersama.php"; break;
+					case 'form-master-user': include "pages/master/form-master-user.php"; break;
+					case 'form-master-pegawai': include "pages/master/form-master-pegawai.php"; break;
+					case 'pre-activated-deactivate-user': include "pages/master/pre-activated-deactivate-user.php"; break;
+					case 'master-user': include "pages/master/master-user.php"; break;
+					case 'activated-user': include "pages/master/activated-user.php"; break;
+					case 'deactivate-user': include "pages/master/deactivate-user.php"; break;
+					case 'master-pegawai': include "pages/master/master-pegawai.php"; break;
+					case 'form-lihat-data-pegawai': include "pages/master/form-lihat-data-pegawai.php"; break;
+					case 'form-edit-data-pegawai': include "pages/master/form-edit-data-pegawai.php"; break;
+					case 'delete-data-pegawai': include "pages/master/delete-data-pegawai.php"; break;
+					case 'edit-data-pegawai': include "pages/master/edit-data-pegawai.php"; break;
+					default : include 'dashboard.php';
 				}
 			?>
 		</section>

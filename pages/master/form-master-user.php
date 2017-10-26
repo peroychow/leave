@@ -24,6 +24,12 @@
 	$getAccess = mysqli_query($con, "
 		SELECT * FROM table_access;
 	");
+
+	$id_number = $_SESSION['id_number'];
+	$queryAccess = mysqli_query($con, "
+		SELECT * FROM users WHERE id_number = '$id_number'
+	");
+	$takeAccess = mysqli_fetch_array($queryAccess);
 ?>
 <section class="content">
     <div class="row">
@@ -37,7 +43,14 @@
 							</div>
 							<div id="formuser" class="panel-collapse collapse">
 								<div class="panel-body">
-									<form action="home-admin.php?page=master-user" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<?php
+									if($takeAccess['access']==1) { 
+										echo "<form action='home-admin.php?page=master-user' class='form-horizontal' method='POST' enctype='multipart/form-data'>";
+									}
+									else if($takeAccess['access']==2) { 
+										echo "<form action='home-hrd.php?page=master-user' class='form-horizontal' method='POST' enctype='multipart/form-data'>";
+									}
+									?>
 										<div class="form-group">
 											<label class="col-sm-3 control-label">Employee Name</label>
 											<div class="col-sm-7">
@@ -101,7 +114,14 @@
 								<td><?php echo $user['password'];?></td>
 								<td><?php echo $user['access'];?></td>
 								<td><?php echo $user['active'];?></td>
-								<td align="center"><a href="home-admin.php?page=pre-activated-deactivate-user&id_number=<?=$user['id_employee'];?>&aktif=<?=$user['active'];?>" title="Activated OR Deactivate"><i class="fa  fa-refresh"></i></a></td>
+								<?php
+								if($takeAccess['access']==1) {
+									$lempar="home-admin.php";
+								}
+								else if($takeAccess['access']==2) {
+									$lempar="home-hrd.php";
+								}?>
+								<td align="center"><a href="<?=$lempar?>?page=pre-activated-deactivate-user&id_number=<?=$user['id_employee'];?>&aktif=<?=$user['active'];?>" title="Activated OR Deactivate"><i class="fa  fa-refresh"></i></a></td>
 							</tr>
 						<?php
 							}

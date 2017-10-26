@@ -1,6 +1,7 @@
 <?php
 	if (isset($_GET['id_number'])) {
-	$id_number = $_GET['id_number'];
+		$id_number = $_GET['id_number'];
+		$lempar = $_GET['akses'];
 	}
 	else {
 		die ("Error. No Kode Selected! ");
@@ -54,7 +55,7 @@
 <section class="content-header">
     <h1>Form<small>Edit Employee <b>#<?= $id_number ?></b></small></h1>
     <ol class="breadcrumb">
-        <li><a href="home-admin.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li><a href="<?=$lempar?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
         <li class="active">Edit Employee Data</li>
     </ol>
 </section>
@@ -63,7 +64,7 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 
-				<form action="home-admin.php?page=edit-data-pegawai&id_number=<?=$id_number?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
+				<form action="<?=$lempar?>?page=edit-data-pegawai&id_number=<?=$id_number?>" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					<br>
 					<div class="form-group">
 						<label class="col-sm-3 control-label">ID Number</label>

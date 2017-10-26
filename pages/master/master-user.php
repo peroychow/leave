@@ -6,7 +6,19 @@
     </ol>
 </section>
 <div class="register-box">
-<?php	
+<?php
+	$nip = $_SESSION['id_number'];
+	$queryAccess = mysqli_query($con, "
+		SELECT * FROM users WHERE id_number = '$nip'
+	");
+	$takeAccess = mysqli_fetch_array($queryAccess);
+	if($takeAccess['access']==1) {
+		$lempar = "home-admin.php";
+	}
+	else if($takeAccess['access']==2) {
+		$lempar = "home-hrd.php";
+	}
+
 	if ($_POST['save'] == "save") {
 		$id_number = $_POST['id_employee'];
 		$hak_akses = $_POST['hak_akses'];
@@ -37,25 +49,25 @@
 		}*/
 
 		if($cekuser > 1) {
-		echo "<div class='register-logo'><b>Oops!</b> ID User Not Available</div>
-			<div class='box box-primary'>
-				<div class='register-box-body'>
-					<p>Harap periksa kembali dan pastikan ID User yang Anda masukan benar.</p>
-					<div class='row'>
-						<div class='col-xs-8'></div>
-						<div class='col-xs-4'>
-							<button type='button' onclick=location.href='home-admin.php?page=form-master-user' class='btn btn-block btn-warning'>Back</button>
+			echo "<div class='register-logo'><b>Oops!</b> ID User Not Available</div>
+				<div class='box box-primary'>
+					<div class='register-box-body'>
+						<p>Harap periksa kembali dan pastikan ID User yang Anda masukan benar.</p>
+						<div class='row'>
+							<div class='col-xs-8'></div>
+							<div class='col-xs-4'>
+								<button type='button' onclick=location.href='".$lempar."?page=form-master-user' class='btn btn-block btn-warning'>Back</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>";
+				</div>";
 		}
 
 		else{
 		
 			$insert = "INSERT INTO users (id_number, password, access, active) VALUES ('$id_number', '$passwd', '$hak_akses', 'N')";
 			$query = mysqli_query ($con, $insert);
-		
+
 			if($query){
 				echo "<div class='register-logo'><b>Input Data</b> Successful!</div>	
 					<div class='register-box-body'>
@@ -63,7 +75,7 @@
 						<div class='row'>
 							<div class='col-xs-8'></div>
 							<div class='col-xs-4'>
-								<button type='button' onclick=location.href='home-admin.php?page=form-master-user' class='btn btn-danger btn-block btn-flat'>Next >></button>
+								<button type='button' onclick=location.href='".$lempar."?page=form-master-user' class='btn btn-danger btn-block btn-flat'>Next >></button>
 							</div>
 						</div>
 					</div>";

@@ -24,12 +24,12 @@
 		?>
 		<div class='row'>
 			<div class='col-xs-8'></div>
-			<div class='col-xs-4'>
+			<!--<div class='col-xs-4'>-->
 				<div class='box-body box-profile'>
 					<p>Cuti tidak di terima</p>
 					<a class='btn btn-primary btn-block' href='home-hrd.php?page=pre-approval-cuti'>OK</a>
 				</div>
-			</div>
+			<!--</div>-->
 		</div>
 	</div>
 </div>

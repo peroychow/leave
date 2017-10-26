@@ -46,6 +46,12 @@
 		WHERE table_access.id_access='3';
 	");
 
+	$nip = $_SESSION['id_number'];
+	$queryAccess = mysqli_query($con, "
+		SELECT * FROM users WHERE id_number = '$nip'
+	");
+	$takeAccess = mysqli_fetch_array($queryAccess);
+
 ?>
 <section class="content">
     <div class="row">
@@ -59,7 +65,15 @@
 							</div>
 							<div id="formpegawai" class="panel-collapse collapse">
 								<div class="panel-body">
-									<form action="home-admin.php?page=master-pegawai" class="form-horizontal" method="POST" enctype="multipart/form-data">
+									<?php 
+										if($takeAccess['access']==1) {
+											$lempar="home-admin.php";
+										}
+										else if($takeAccess['access']==2) {
+											$lempar="home-hrd.php";
+										}
+									?>
+									<form action="<?=$lempar?>?page=master-pegawai" class="form-horizontal" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
 											<label class="col-sm-3 control-label">ID Number</label>
 											<div class="col-sm-7">
@@ -463,7 +477,7 @@
 								<td><?php echo $peg['join_date'];?></td>
 								<td><?php echo $peg['employment_status'];?></td>
 								<td><?php echo $peg['phone'];?></td>
-								<td class="tools"><a href="home-admin.php?page=form-lihat-data-pegawai&id_number=<?=$peg['id_number'];?>" title="view"><i class="fa fa-folder-open"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="home-admin.php?page=form-edit-data-pegawai&id_number=<?=$peg['id_number'];?>" title="edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="home-admin.php?page=delete-data-pegawai&id_number=<?php echo $peg['id_number'];?>" title="delete"><i class="fa fa-trash-o"></i></a></td>
+								<td class="tools"><a href="<?=$lempar?>?page=form-lihat-data-pegawai&id_number=<?=$peg['id_number'];?>" title="view"><i class="fa fa-folder-open"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?=$lempar?>?page=form-edit-data-pegawai&id_number=<?=$peg['id_number'];?>&akses=<?=$lempar?>" title="edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?=$lempar?>?page=delete-data-pegawai&id_number=<?php echo $peg['id_number'];?>" title="delete"><i class="fa fa-trash-o"></i></a></td>
 							</tr>
 						<?php
 							}

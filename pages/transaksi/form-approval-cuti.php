@@ -7,7 +7,7 @@
 </section>
 <div class="register-box">
 <?php
-	if (isset($_GET['id_leave']) AND ($_GET['id_number']) AND ($_GET['days']) AND ($_GET['leave_type'])) {
+	if (isset($_GET['id_leave']) AND isset($_GET['id_number']) AND isset($_GET['days']) AND isset($_GET['leave_type'])) {
 	$id_leave	= $_GET['id_leave'];
 	$id_number 		= $_GET['id_number'];
 	$days 	= $_GET['days'];

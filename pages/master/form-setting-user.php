@@ -88,6 +88,11 @@
 									<?php 
 										if($accessID=='Admin') {
 											echo '
+												<form action="home-admin.php?page=edit-data-pegawai&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
+											';
+										}
+										else {
+											echo '
 												<form action="home-pegawai.php?page=edit-data-pegawai&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
 											';
 										}
@@ -484,6 +489,19 @@
 							</div>
 							<div id="editpasswd" class="panel-collapse collapse">
 								<div class="panel-body">
+									<?php 
+										if($accessID=='Admin') {
+											echo '
+												<form action="home-admin.php?page=edit-password&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
+											';
+										}
+										else {
+											echo '
+												<form action="home-pegawai.php?page=edit-password&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
+											';
+										}
+									?>
+									<!--
 									<form action="#" class="form-horizontal" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
 											<!--<label class="col-sm-3 control-label">ID User</label>
@@ -506,7 +524,7 @@
 										<div class="form-group">
 											<label class="col-sm-3 control-label">Re-type Password</label>
 											<div class="col-sm-7">
-												<input type="password" name="password" class="form-control" maxlength="40">
+												<input type="password" name="repassword" class="form-control" maxlength="40">
 											</div>
 										</div>
 										<div class="form-group">

@@ -9,6 +9,7 @@
 <?php
 	if (isset($_GET['id_number'])) {
 		$id_number = $_GET['id_number'];
+		$nip = $_SESSION['id_number']; 
 	}
 	else {
 		die ("Error. No Kode Selected! ");	
@@ -64,6 +65,7 @@
 		$reporting_to						= $_POST['reporting_to'];
 		$passwd								= md5($_POST['date_of_birth']);
 		
+		include "dist/koneksi.php";
 		$update= mysqli_query ($con, "
 			UPDATE table_employee 
 			SET name='$name', 
@@ -115,16 +117,15 @@
 				reporting_to='$reporting_to'
 			WHERE id_number='$id_number'");
 		if($update){
-			include "dist/koneksi.php";
 
-			$checkAccess = mysqli_query($con, 
+			/*$checkAccess = mysqli_query($con, 
 				"SELECT table_employee.id_number, table_employee.name, table_access.name AS access
 				FROM users
 				INNER JOIN table_employee
 				ON users.id_number = table_employee.id_number
 				INNER JOIN table_access
 				ON users.access = table_access.id_access
-				WHERE users.id_number = '$id_number';"
+				WHERE users.id_number = '$id_number'"
 			);
 
 			$result = mysqli_fetch_array($checkAccess);
@@ -133,8 +134,24 @@
 			if($accessID == 'Admin') {
 				$action = "home-admin.php";
 			}
-			else {
+			else if($accessID == 'HR') {
+				$action = "home-hrd.php";
+			}
+			else if($accessID == 'Employee') {
 				$action = "home-pegawai.php";
+			}*/
+			$queryAccess = mysqli_query($con, "
+				SELECT * FROM users WHERE id_number = '$nip'
+			");
+			$takeAccess = mysqli_fetch_array($queryAccess);
+			if($takeAccess['access']==1) {
+				$lempar="home-admin.php";
+			}
+			else if($takeAccess['access']==2) {
+				$lempar="home-hrd.php";
+			}
+			else if($takeAccess['access']==4) {
+				$lempar="home-pegawai.php";
 			}
 
 			echo "<div class='register-logo'><b>Edit</b> Successful!</div>	
@@ -143,7 +160,7 @@
 					<div class='row'>
 						<div class='col-xs-8'></div>
 						<div class='col-xs-4'>
-							<button type='button' onclick=location.href='".$action."' class='btn btn-primary btn-block btn-flat'>Next >></button>
+							<button type='button' onclick=location.href='".$lempar."' class='btn btn-primary btn-block btn-flat'>Next >></button>
 						</div>
 					</div>
 				</div>";
