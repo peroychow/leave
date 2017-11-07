@@ -169,6 +169,8 @@ if($_SESSION['hak_akses']!="HR"){
 					case 'form-edit-data-pegawai': include "pages/master/form-edit-data-pegawai.php"; break;
 					case 'delete-data-pegawai': include "pages/master/delete-data-pegawai.php"; break;
 					case 'edit-data-pegawai': include "pages/master/edit-data-pegawai.php"; break;
+					case 'import-pegawai': include "pages/master/import-pegawai.php"; break;
+					case 'import-aja': include "pages/import_export/form.php"; break;
 					default : include 'dashboard.php';
 				}
 			?>

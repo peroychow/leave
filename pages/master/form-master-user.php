@@ -1,10 +1,3 @@
-<section class="content-header">
-    <h1>Master<small>Data User</small></h1>
-    <ol class="breadcrumb">
-        <li><a href="home-admin.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Data User</li>
-    </ol>
-</section>
 <?php
 	include "dist/koneksi.php";
 
@@ -31,6 +24,22 @@
 	");
 	$takeAccess = mysqli_fetch_array($queryAccess);
 ?>
+<section class="content-header">
+    <h1>Master<small>Data User</small></h1>
+    <ol class="breadcrumb">
+    	<?php
+    		if($takeAccess['access']==1) {
+    			$link = "home-admin.php";
+    		}
+    		else if($takeAccess['access']==2) {
+    			$link = "home-hrd.php";
+    		}
+    	?>
+        <li><a href="<?=$link?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">Data User</li>
+    </ol>
+</section>
+
 <section class="content">
     <div class="row">
         <div class="col-md-12">

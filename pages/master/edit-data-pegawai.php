@@ -160,7 +160,7 @@
 					<div class='row'>
 						<div class='col-xs-8'></div>
 						<div class='col-xs-4'>
-							<button type='button' onclick=location.href='".$lempar."' class='btn btn-primary btn-block btn-flat'>Next >></button>
+							<button type='button' onclick=location.href='".$lempar."?page=form-master-pegawai' class='btn btn-primary btn-block btn-flat'>Next >></button>
 						</div>
 					</div>
 				</div>";

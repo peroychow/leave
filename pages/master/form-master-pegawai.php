@@ -1,10 +1,3 @@
-<section class="content-header">
-    <h1>Master<small>Data Pegawai</small></h1>
-    <ol class="breadcrumb">
-        <li><a href="home-admin.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Data Pegawai</li>
-    </ol>
-</section>
 <?php
 	include "dist/koneksi.php";
 	//$tampilPeg=mysqli_query($con, "SELECT * FROM tb_pegawai ORDER BY nip");
@@ -51,8 +44,20 @@
 		SELECT * FROM users WHERE id_number = '$nip'
 	");
 	$takeAccess = mysqli_fetch_array($queryAccess);
-
+	if($takeAccess['access']==1) {
+		$lempar="home-admin.php";
+	}
+	else if($takeAccess['access']==2) {
+		$lempar="home-hrd.php";
+	}
 ?>
+<section class="content-header">
+    <h1>Master<small>Data Pegawai</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="<?=$lempar?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">Data Pegawai</li>
+    </ol>
+</section>
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -61,18 +66,10 @@
 					<div class="panel-group">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								 <h4 class="panel-title"><i class="fa fa-plus"></i> Add an Employee<a data-toggle="collapse" data-target="#formpegawai" href="#formpegawai" class="collapsed"></a></h4>
+								<h4 class="panel-title"><i class="fa fa-plus"></i> Add an Employee<a data-toggle="collapse" data-target="#formpegawai" href="#formpegawai" class="collapsed"></a></h4>
 							</div>
 							<div id="formpegawai" class="panel-collapse collapse">
 								<div class="panel-body">
-									<?php 
-										if($takeAccess['access']==1) {
-											$lempar="home-admin.php";
-										}
-										else if($takeAccess['access']==2) {
-											$lempar="home-hrd.php";
-										}
-									?>
 									<form action="<?=$lempar?>?page=master-pegawai" class="form-horizontal" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
 											<label class="col-sm-3 control-label">ID Number</label>
@@ -484,6 +481,16 @@
 						?>
 						</tbody>
 					</table>
+					<div>
+						<hr>
+						<form action="<?=$lempar?>?page=import-pegawai" method="POST" enctype="multipart/form-data" name="import" id="import">
+							Import from Excel: <br><br> 
+							<input id="input-b1" name="input-b1" type="file" class="file">
+							<br>
+							<input type="submit" name="Save" value="Save">
+						</form>
+						<hr>
+					</div>
 				</div>
 			</div>
         </div>

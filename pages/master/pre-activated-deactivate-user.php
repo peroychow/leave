@@ -1,11 +1,3 @@
-<section class="content-header">
-    <h1>Activated or Deactivate<small>User</small></h1>
-    <ol class="breadcrumb">
-        <li><a href="home-admin.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-        <li class="active">Activated or Deactivate User</li>
-    </ol>
-</section>
-<div class="register-box">
 <?php
 	if (isset($_GET['id_number']) AND ($_GET['aktif'])) {
 	
@@ -31,6 +23,16 @@
 	else if($takeAccess['access']==2) {
 		$lempar="home-hrd.php";
 	}
+?>
+<section class="content-header">
+    <h1>Activated or Deactivate<small>User</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="<?=$lempar?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">Activated or Deactivate User</li>
+    </ol>
+</section>
+<div class="register-box">
+	<?php 
 	echo "<div class='register-logo'><b>Activated or Deactivate</b> User!</div>	
 		<div class='register-box-body'>
 			<p>Silahkan tentukan status untuk user <b>$id_number</b></p>

@@ -7,19 +7,27 @@
 	}
 
 	include "dist/koneksi.php";
-	//$ambilData=mysqli_query($con, "SELECT * FROM tb_pegawai WHERE nip='$nip'");
 
 	$takeEmployee = mysqli_query($con, "SELECT * FROM table_employee WHERE id_number='$id_number'");
 	$result = mysqli_fetch_array($takeEmployee);
 	$id_number = $result['id_number'];
 
-	//$hasil=mysqli_fetch_array($ambilData);
-	//$nip = $hasil['nip'];
+	$nip = $_SESSION['id_number'];
+	$queryAccess = mysqli_query($con, "
+		SELECT * FROM users WHERE id_number = '$nip'
+	");
+	$takeAccess = mysqli_fetch_array($queryAccess);
+	if($takeAccess['access']==1) {
+		$lempar="home-admin.php";
+	}
+	else if($takeAccess['access']==2) {
+		$lempar="home-hrd.php";
+	}
 ?>
 <section class="content-header">
     <h1>Form<small>Lihat Data Pegawai <b>#<?=$id_number?></b></small></h1>
     <ol class="breadcrumb">
-        <li><a href="home-admin.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li><a href="<?=$lempar?>"><i class="fa fa-dashboard"></i>Dashboard</a></li>
         <li class="active">Lihat Data Pegawai</li>
     </ol>
 </section>
