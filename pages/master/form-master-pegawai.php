@@ -485,7 +485,7 @@
 						<hr>
 						<form action="<?=$lempar?>?page=import-pegawai" method="POST" enctype="multipart/form-data" name="import" id="import">
 							Import from Excel: <br><br> 
-							<input id="input-b1" name="input-b1" type="file" class="file">
+							<input id="fileupload" name="fileupload" type="file" class="file">
 							<br>
 							<input type="submit" name="Save" value="Save">
 						</form>

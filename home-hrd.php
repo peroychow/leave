@@ -170,7 +170,9 @@ if($_SESSION['hak_akses']!="HR"){
 					case 'delete-data-pegawai': include "pages/master/delete-data-pegawai.php"; break;
 					case 'edit-data-pegawai': include "pages/master/edit-data-pegawai.php"; break;
 					case 'import-pegawai': include "pages/master/import-pegawai.php"; break;
-					case 'import-aja': include "pages/import_export/form.php"; break;
+					case 'import-testing': include "pages/import_export/import_employee.php"; break;
+					case 'import-save' : include "pages/import_export/save.php"; break;
+					case 'export-csv' : include "pages/import_export/export.php"; break;
 					default : include 'dashboard.php';
 				}
 			?>
