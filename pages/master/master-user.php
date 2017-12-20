@@ -7,6 +7,7 @@
 </section>
 <div class="register-box">
 <?php
+	include "dist/koneksi.php";
 	$nip = $_SESSION['id_number'];
 	$queryAccess = mysqli_query($con, "
 		SELECT * FROM users WHERE id_number = '$nip'

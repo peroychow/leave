@@ -28,7 +28,7 @@
 							$id_number = $_SESSION['id_number'];
 
 							include "dist/koneksi.php";
-							$showLeave=mysqli_query($con, "SELECT * FROM table_leave_request WHERE id_number='$id_number'");
+							$showLeave=mysqli_query($con, "SELECT id_leave, DATE_FORMAT(date_request, '%e %M %Y') AS date_request, days, DATE_FORMAT(date_from, '%e %M %Y') AS date_from, DATE_FORMAT(date_to, '%e %M %Y') AS date_to, leave_type, purpose, approval FROM table_leave_request WHERE id_number='$id_number'");
 							while($history=mysqli_fetch_array($showLeave)){
 						?>	
 							<tr>

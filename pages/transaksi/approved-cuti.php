@@ -1,3 +1,16 @@
+<?php
+	$id_number = $_SESSION['id_number'];
+	$queryAccess = mysqli_query($con, "
+		SELECT * FROM users WHERE id_number = '$id_number'
+	");
+	$takeAccess = mysqli_fetch_array($queryAccess);
+	if($takeAccess['access']==2) {
+		$redirect = "home-hrd.php";
+	}
+	else if($takeAccess['access']==3) {
+		$redirect = "home-supervisor.php";
+	}
+?>
 <section class="content-header">
     <h1>Approved<small>Leave</small></h1>
     <ol class="breadcrumb">
@@ -33,8 +46,7 @@
 		}
 		else {
 			/* Belum mau di taruh query, spece untuk mengambil pilihan diluar dari annual leave */
-			/*$setuju = "UPDATE tb_mohoncuti SET persetujuan='DISETUJUI' WHERE no_cuti='$no_cuti'";
-			$query = mysqli_query ($con, $setuju);		
+			/*	
 			*/
 		}
 	?>
@@ -46,9 +58,8 @@
 			<div class='col-xs-8'></div>
 			<!--<div class='col-xs-4'>-->
 				<div class='box-body box-profile'>
-					<a class='btn btn-primary btn-block' href='home-hrd.php?page=pre-approval-cuti'>OK</a>
+					<a class='btn btn-primary btn-block' href='<?=$redirect?>?page=pre-approval-cuti'>OK</a>
 				</div>
-			<!--</div>-->
 		</div>
 	</div>
 </div>

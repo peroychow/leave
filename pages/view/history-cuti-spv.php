@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>Leave<small>History</small></h1>
     <ol class="breadcrumb">
-        <li><a href="home-hrd.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li><a href="home-supervisor.php"><i class="fa fa-dashboard"></i>Dashboard</a></li>
         <li class="active">Leave History</li>
     </ol>
 </section>
@@ -14,6 +14,7 @@
 						<thead>
 							<tr>
 								<th>Name</th>
+								<th>ID Number</th>
 								<th>Date Request</th>
 								<th>Days</th>
 								<th>Date From</th>
@@ -26,16 +27,20 @@
 						<tbody>
 						<?php
 							include "dist/koneksi.php";
+							$id_number = $_SESSION['id_number'];
+
 							$showLeave=mysqli_query($con, "
-								SELECT table_leave_request.id_leave, table_employee.name, table_leave_request.id_number, DATE_FORMAT(table_leave_request.date_request, '%e %M %Y') AS date_request, DATE_FORMAT(table_leave_request.date_from, '%e %M %Y') AS date_from, DATE_FORMAT(table_leave_request.date_to, '%e %M %Y') AS date_to, table_leave_request.days, table_leave_request.leave_type, table_leave_request.approval, table_leave_request.purpose
+								SELECT table_leave_request.id_leave, table_employee.name, table_leave_request.id_number, DATE_FORMAT(table_leave_request.date_request,'%e %M %Y') as date_request, DATE_FORMAT(table_leave_request.date_from,'%e %M %Y') as date_from, DATE_FORMAT(table_leave_request.date_to,'%e %M %Y') as date_to, table_leave_request.days, table_leave_request.leave_type, table_leave_request.approval, table_leave_request.purpose
 								FROM table_leave_request
 								INNER JOIN table_employee
 								ON table_leave_request.id_number = table_employee.id_number
+								WHERE table_employee.id_number = '$id_number' OR table_employee.reporting_to = '$id_number';
 							");
 							while($history=mysqli_fetch_array($showLeave)){
 						?>	
 							<tr>
 								<td><?php echo $history['name'];?></td>
+								<td><?php echo $history['id_number'];?></td>
 								<td><?php echo $history['date_request'];?></td>
 								<td><?php echo $history['days'];?></td>
 								<td><?php echo $history['date_from'];?></td>
@@ -48,7 +53,7 @@
 							}
 						?>
 						</tbody>
-					</table>
+					</table>   	
 				</div>
 			</div>
         </div>

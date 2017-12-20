@@ -10,6 +10,7 @@
 	}
 ?>
 <?php
+	include "dist/koneksi.php";
 	
 	$id_akses = $_SESSION['id_number'];
 	$queryAccess = mysqli_query($con, "

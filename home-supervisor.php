@@ -5,9 +5,9 @@ if(!isset($_SESSION['id_number'])){
 		<p>Sistem Logout. Anda harus melakukan Login kembali.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");
 }
-if($_SESSION['hak_akses']!="HR"){
+if($_SESSION['hak_akses']!="Supervisor"){
     die("<b>Oops!</b> Access Failed.
-		<p>Anda Bukan HRD.</p>
+		<p>Anda Bukan SPV.</p>
 		<button type='button' onclick=location.href='index.php'>Back</button>");
 }
 ?>
@@ -56,8 +56,13 @@ if($_SESSION['hak_akses']!="HR"){
 <?php
 	include "dist/koneksi.php";
 
+	$id_number=$_SESSION['id_number'];
 	$showLeaveRequest = mysqli_query($con, "
-		SELECT * from table_leave_request where approval is NULL
+		SELECT table_leave_request.id_leave, table_leave_request.id_number, table_employee.name, table_leave_request.date_request, table_leave_request.date_from, table_leave_request.date_to, table_leave_request.days, table_leave_request.leave_type, table_leave_request.approval, table_leave_request.purpose
+		FROM table_leave_request
+		INNER JOIN table_employee
+		ON table_leave_request.id_number = table_employee.id_number
+		WHERE table_leave_request.approval IS NULL AND table_employee.reporting_to='$id_number';
 	");
 	$leaveRequest = mysqli_num_rows($showLeaveRequest);
 	/* Query disini blm terpakai
@@ -75,7 +80,7 @@ if($_SESSION['hak_akses']!="HR"){
 <body class="hold-transition skin-red fixed sidebar-mini">
 <div class="wrapper">
 	<header class="main-header">
-		<a href="home-hrd.php" class="logo"><span class="logo-mini">QHA</span><span class="logo-lg"> Qareer Group Asia</span></a>
+		<a href="home-supervisor.php" class="logo"><span class="logo-mini">QHA</span><span class="logo-lg"> Qareer Group Asia</span></a>
 		<nav class="navbar navbar-static-top" role="navigation">
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span></a>
 			<div class="navbar-custom-menu">
@@ -118,27 +123,15 @@ if($_SESSION['hak_akses']!="HR"){
 		<section class="sidebar">
 			<ul class="sidebar-menu">
 				<li class="header">MAIN NAVIGATION</li>
-				<li class="treeview"><a href="home-hrd.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
-				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Master Data</span><i class="fa fa-angle-left pull-right"></i></a>
-					<ul class="treeview-menu">
-						<li><a href="home-hrd.php?page=form-master-user">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> User</a></li>
-						<li><a href="home-hrd.php?page=form-master-pegawai">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Employee</a></li>
-					</ul>
-				</li>
+				<li class="treeview"><a href="home-supervisor.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
 				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Leave Request</span><i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a href="home-hrd.php?page=form-permohonan-cuti-tahunan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Annual</a></li>
-						<li><a href="home-hrd.php?page=form-permohonan-cuti-umum">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Special</a></li>
+						<li><a href="home-supervisor.php?page=form-permohonan-cuti-tahunan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Annual</a></li>
+						<li><a href="home-supervisor.php?page=form-permohonan-cuti-umum">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i> Special</a></li>
 					</ul>
 				</li>
-				<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Leave Input Employee</span><i class="fa fa-angle-left pull-right"></i></a>
-					<ul class="treeview-menu">
-						<li><a href="home-hrd.php?page=form-input-data-cuti-tahunan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i>Input Leave an Employee</a></li>
-						<li><a href="home-hrd.php?page=form-permohonan-cuti-bersama">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i>Input Joint Holiday</a></li>
-					</ul>
-				</li>
-				<li class="treeview"><a href="home-hrd.php?page=pre-approval-cuti"><i class="fa fa-gear"></i> <span>Leave Approval</span><small class="label pull-right bg-yellow"><?=$leaveRequest?></small></a></li>
-				<li class="treeview"><a href="home-hrd.php?page=history-cuti-hrd"><i class="fa fa-exchange"></i> <span>History</span></a></li>
+				<li class="treeview"><a href="home-supervisor.php?page=pre-approval-cuti"><i class="fa fa-gear"></i> <span>Leave Approval</span><small class="label pull-right bg-yellow"><?=$leaveRequest?></small></a></li>
+				<li class="treeview"><a href="home-supervisor.php?page=history-cuti-spv"><i class="fa fa-exchange"></i> <span>History</span></a></li>
 
 			</ul>
 		</section>
@@ -154,7 +147,7 @@ if($_SESSION['hak_akses']!="HR"){
 					case 'form-approval-cuti': include "pages/transaksi/form-approval-cuti.php"; break;
 					case 'approved-cuti': include "pages/transaksi/approved-cuti.php"; break;
 					case 'not-approved-cuti': include "pages/transaksi/not-approved-cuti.php"; break;
-					case 'history-cuti-hrd': include "pages/view/history-cuti-hrd.php"; break;
+					case 'history-cuti-spv': include "pages/view/history-cuti-spv.php"; break;
 					case 'form-permohonan-cuti-tahunan': include "pages/transaksi/form-permohonan-cuti-tahunan.php"; break;
 					case 'permohonan-cuti-tahunan': include "pages/transaksi/permohonan-cuti-tahunan.php"; break;
 					case 'form-permohonan-cuti-bersama': include "pages/transaksi/form-permohonan-cuti-bersama.php"; break;

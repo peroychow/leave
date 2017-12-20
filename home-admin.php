@@ -16,7 +16,7 @@ if($_SESSION['hak_akses']!="Admin"){
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Aplikasi Pengajuan Cuti Online</title>
+	<title>QHA - Leave Request</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.5 -->
@@ -127,6 +127,7 @@ if($_SESSION['hak_akses']!="Admin"){
 					case 'edit-data-pegawai': include "pages/master/edit-data-pegawai.php"; break;
 					case 'form-lihat-data-pegawai': include "pages/master/form-lihat-data-pegawai.php"; break;
 					case 'form-permohonan-cuti-tahunan': include "pages/transaksi/form-permohonan-cuti-tahunan.php"; break;
+					case 'permohonan-cuti-tahunan': include "pages/transaksi/permohonan-cuti-tahunan.php"; break;
 					case 'permohonan-cuti-umum': include "pages/transaksi/permohonan-cuti-umum.php"; break;
 					case 'history-cuti-pegawai': include "pages/view/history-cuti-pegawai.php"; break;
 					case 'form-setting-user': include "pages/master/form-setting-user.php"; break;

@@ -28,8 +28,13 @@
 					}
 					else if($takeAccess['access']==2) {
 					echo "
-						<form action='home-hrd.php?page=permohonan-cuti-bersama' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
+						<form action='home-hrd.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
 					";
+					}
+					else if($takeAccess['access']==3) {
+						echo "
+							<form action='home-supervisor.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'>
+						";
 					}
 					else if($takeAccess['access']==4) {
 					echo "

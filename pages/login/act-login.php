@@ -45,6 +45,9 @@
 			else if($qry['access']==Employee){
 				header("location:home-pegawai.php");
 			}
+			else if($qry['access']==Supervisor) {
+				header("location:home-supervisor.php");
+			}
 			else if($qry['access']==HR){
 				header("location:home-hrd.php");
 			}
