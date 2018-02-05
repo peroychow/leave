@@ -1,1 +1,1 @@
-cuti
+leave

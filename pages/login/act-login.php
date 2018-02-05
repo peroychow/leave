@@ -1,7 +1,6 @@
 <div class="login-box">
 <?php
 	include "dist/koneksi.php";
-	//$id_user		= $_POST['id_user'];
 	$id_number		= $_POST['id_number'];
 	$password		= $_POST['password'];
 	$passwdenc		= md5($password);
@@ -45,7 +44,7 @@
 			else if($qry['access']==Employee){
 				header("location:home-pegawai.php");
 			}
-			else if($qry['access']==Supervisor) {
+			else if($qry['access']==Supervisor) { 
 				header("location:home-supervisor.php");
 			}
 			else if($qry['access']==HR){
