@@ -19,4 +19,4 @@ except:
 	db.rollback()
 
 # Disconnect from server
-db.close()
+db.close()	
