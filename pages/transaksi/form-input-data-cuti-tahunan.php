@@ -38,7 +38,7 @@
 													</select>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" name="hak_cuti_tahunan" class="form-control" placeholder="Jumlah" maxlength="2">
+												<input type="text" name="hak_cuti_tahunan" class="form-control" placeholder="Jumlah" maxlength="3">
 											</div>
 											<div class="col-sm-3">
 												<button type="submit" name="save" value="save" class="btn btn-danger">Save</button>
