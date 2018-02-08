@@ -6,6 +6,15 @@
 		SELECT * FROM users WHERE id_number = '$id_number'
 	");
 	$takeAccess = mysqli_fetch_array($query);
+
+	$showEmployee = mysqli_query($con, "
+		SELECT table_employee.id_number AS id_employee, table_employee.name, users.password, table_access.name AS access, users.active
+		FROM users
+		INNER JOIN table_employee
+		ON users.id_number = table_employee.id_number
+		INNER JOIN table_access
+		ON users.access = table_access.id_access
+	");
 ?>
 
 <section class="content-header">
@@ -20,29 +29,48 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<hr/>
+
 				<?php
 					if($takeAccess['access']==1) { 
 					echo "
 						<form action='home-admin.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
+						<div class='box-body'>
 					";
 					}
 					else if($takeAccess['access']==2) {
 					echo "
 						<form action='home-hrd.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
+						<div class='box-body'>
+							<div class='form-group'>
+								<label class='col-sm-3 control-label'>Name</label>
+								<div class='col-sm-4'>
+									<select name='who' id='who' class='form-control'>
+					";
+							while($emp=mysqli_fetch_array($showEmployee)) {
+								echo "
+									<option value='".$emp['id_employee']."'>".$emp['name']."</option>
+								";
+							}
+					echo "
+									</select>
+								</div>
+							</div>
 					";
 					}
 					else if($takeAccess['access']==3) {
 						echo "
 							<form action='home-supervisor.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'>
+							<div class='box-body'>
 						";
 					}
 					else if($takeAccess['access']==4) {
 					echo "
 						<form action='home-pegawai.php?page=permohonan-cuti-tahunan' class='form-horizontal' method='POST' enctype='multipart/form-data'> 
+						<div class='box-body'>
 					";
 					}
 				?>
-					<div class="box-body">
+					<!--<div class="box-body">-->
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Leave Date</label>
 							<div class="col-sm-4">

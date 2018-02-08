@@ -12,31 +12,6 @@
 	$id_number	= $_SESSION['id_number'];
 	$tgl		= date('Y:m:d');
 
-	/*function checkAccess() {
-		include "dist/koneksi.php";
-	
-		$id_number	= $_SESSION['id_number'];
-		$tgl		= date('Y:m:d');
-
-		$akses = "SELECT access FROM users WHERE id_number='$id_number'";
-		$queryacc = mysqli_query($con, $akses);
-			$dataakses = mysqli_fetch_array($queryacc);
-			$access = $dataakses['access'];
-		
-		if($access == 1) {
-			$lempar="home-admin.php";
-		}
-		else if($access == 2) {
-			$lempar="home-hrd.php";
-		}
-		else if($access == 3) {
-			$lempar = "home-supervisor.php";
-		}	
-		else if($access == 4) {
-			$lempar = "home-pegawai.php";
-		}
-	}*/
-
 	$akses = "SELECT access FROM users WHERE id_number='$id_number'";
 		$queryacc = mysqli_query($con, $akses);
 			$dataakses = mysqli_fetch_array($queryacc);
@@ -44,15 +19,19 @@
 		
 		if($access == 1) {
 			$lempar="home-admin.php";
+			$who = $id_number;
 		}
 		else if($access == 2) {
 			$lempar="home-hrd.php";
+			$who = $_POST['who'];
 		}
 		else if($access == 3) {
 			$lempar = "home-supervisor.php";
+			$who = $id_number;
 		}	
 		else if($access == 4) {
 			$lempar = "home-pegawai.php";
+			$who = $id_number;
 		}
 
 	function information($lemper, $notice) {
@@ -77,12 +56,12 @@
 		$selisih = $selisih/86400;
 		$days = 1 + $selisih;
 		
-		$cekhak = "SELECT remaining_leave FROM table_employee WHERE id_number='$id_number'";
+		$cekhak = "SELECT remaining_leave FROM table_employee WHERE id_number='$who'";
 		$query = mysqli_query($con, $cekhak);
 			$data = mysqli_fetch_array($query);
 			$hak = $data['remaining_leave'];
 
-		if (empty($_POST['date_from']) || empty($_POST['date_to']) || empty($_POST['purpose']) || empty($_POST['contact']) ) {
+		if (empty($who) || empty($_POST['date_from']) || empty($_POST['date_to']) || empty($_POST['purpose']) || empty($_POST['contact']) ) {
 			echo "<div class='register-logo'><b>Oops!</b> Data Tidak Lengkap.</div>
 				<div class='box box-primary'>
 					<div class='register-box-body'>
@@ -103,7 +82,7 @@
 		}
 			
 		else{
-			$insert = "INSERT INTO table_leave_request (id_number, date_request, date_from, date_to, days, leave_type, purpose, contact) VALUES ('$id_number', '$tgl', '$date_from', '$date_to', '$days', '$leave_type', '$purpose', '$contact')";
+			$insert = "INSERT INTO table_leave_request (id_number, date_request, date_from, date_to, days, leave_type, purpose, contact) VALUES ('$who', '$tgl', '$date_from', '$date_to', '$days', '$leave_type', '$purpose', '$contact')";
 			$query = mysqli_query ($con, $insert);
 
 			if($query){
