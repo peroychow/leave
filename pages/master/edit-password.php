@@ -44,7 +44,13 @@
 				if($accessID == 'Admin') {
 					$action = "home-admin.php";
 				}
-				else {
+				else if($accessID == 'HR') {
+					$action = "home-hrd.php";
+				}
+				else if($accessID == 'Supervisor') {
+					$action = "home-supervisor.php";
+				}
+				else if($accessID == 'Employee') {
 					$action = "home-pegawai.php";
 				}
 

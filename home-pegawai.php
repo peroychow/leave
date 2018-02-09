@@ -129,6 +129,7 @@ if($_SESSION['hak_akses']=="Employee" & $_SESSION['hak_akses']=="Admin"){
 					case 'history-cuti-pegawai': include "pages/view/history-cuti-pegawai.php"; break;
 					case 'form-setting-user': include "pages/master/form-setting-user.php"; break;
 					case 'edit-data-pegawai': include "pages/master/edit-data-pegawai.php"; break;
+					case 'edit-password': include "pages/master/edit-password.php"; break;
 					default : include 'dashboard-pegawai.php';	
 				}
 			?>

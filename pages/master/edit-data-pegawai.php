@@ -150,6 +150,9 @@
 			else if($takeAccess['access']==2) {
 				$lempar="home-hrd.php";
 			}
+			else if($takeAccess['access']==3) {
+				$lempar="home-supervisor";
+			}
 			else if($takeAccess['access']==4) {
 				$lempar="home-pegawai.php";
 			}

@@ -91,6 +91,11 @@
 												<form action="home-admin.php?page=edit-data-pegawai&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
 											';
 										}
+										else if($accessID=='HR') {
+											echo '
+												<form action="home-hrd.php?page=edit-data-pegawai&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
+											';	
+										}
 										else {
 											echo '
 												<form action="home-pegawai.php?page=edit-data-pegawai&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
@@ -493,6 +498,11 @@
 										if($accessID=='Admin') {
 											echo '
 												<form action="home-admin.php?page=edit-password&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
+											';
+										}
+										else if($accessID=='HR') {
+											echo '
+												<form action="home-hrd.php?page=edit-password&id_number= '.$id_number.'" class="form-horizontal" method="POST" enctype="multipart/form-data">
 											';
 										}
 										else {

@@ -102,7 +102,7 @@ if($_SESSION['hak_akses']!="HR"){
 							</li>
 							<li class="user-footer">
 								<div class="pull-left">
-									<?php echo date("d-m-Y");?>
+									<a href="home-hrd.php?page=form-setting-user&id_number=<?php echo $_SESSION['id_number'] ?>" class="btn btn-default btn-flat">Settings</a>
 								</div>
 								<div class="pull-right">
 								  <a href="pages/login/act-logout.php" class="btn btn-default btn-flat">Log out</a>
@@ -174,6 +174,8 @@ if($_SESSION['hak_akses']!="HR"){
 					case 'import-testing': include "pages/import_export/import_employee.php"; break;
 					case 'import-save' : include "pages/import_export/save.php"; break;
 					case 'export-csv' : include "pages/import_export/export.php"; break;
+					case 'form-setting-user': include "pages/master/form-setting-user.php"; break;
+					case 'edit-password': include "pages/master/edit-password.php"; break;
 					default : include 'dashboard.php';
 				}
 			?>

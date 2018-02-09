@@ -70,3 +70,32 @@
         </div>
     </div>
 </section>
+
+<section class="content-header">
+   <h1>Employee Leave<small>Infrormation</small></h1>
+    <ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>Employee Leave</a></li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+    	<div class="col-lg-3 col-xs-6">
+			<div class="card">
+			  <div class="card-block">
+			    <h4 class="card-title">Who leave now?</h4>
+			    <h6 class="card-subtitle mb-2 text-muted"><?php echo date("d-m-Y");?></h6>
+			    
+			    <ul class="list-group list-group-flush">
+					<li class="list-group-item">Cras justo odio</li>
+				    <li class="list-group-item">Dapibus ac facilisis in</li>
+				    <li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+
+			    <a href="#" class="card-link">Card link</a>
+			    <a href="#" class="card-link">Another link</a>
+			  </div>
+			</div>
+        </div>
+    </div>
+</section>
