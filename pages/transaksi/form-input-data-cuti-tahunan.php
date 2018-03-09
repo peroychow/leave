@@ -23,7 +23,7 @@
 								<div class="panel-body">
 									<form action="home-hrd.php?page=input-data-cuti-tahunan" class="form-horizontal" method="POST" enctype="multipart/form-data">
 										<div class="form-group">
-											<label class="col-sm-3 control-label">Jumlah Cuti Tahunan</label>
+											<label class="col-sm-3 control-label">Employee Name</label>
 											<div class="col-sm-3">
 												<?php 
 													$data = mysqli_query($con, "SELECT * FROM table_employee");
@@ -37,9 +37,21 @@
 														?>
 													</select>
 											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Input Leave</label>
 											<div class="col-sm-3">
 												<input type="text" name="hak_cuti_tahunan" class="form-control" placeholder="Jumlah" maxlength="3">
 											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Note</label>
+											<div class="col-sm-6">
+												<textarea type="text" name="note" class="form-control"></textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label"></label>
 											<div class="col-sm-3">
 												<button type="submit" name="save" value="save" class="btn btn-danger">Save</button>
 											</div>	

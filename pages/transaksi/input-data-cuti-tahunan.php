@@ -8,6 +8,9 @@
 <div class="register-box">
 <?php	
 	if ($_POST['save'] == "save") {
+	$actor = $_SESSION['id_number'];
+	$tgl = date('Y:m:d');
+	$note = $_POST['note'];
 	$id_number	= $_POST['id_number'];
 	$hak_cuti_tahunan =$_POST['hak_cuti_tahunan'];
 	
@@ -30,8 +33,14 @@
 		include "dist/koneksi.php";
 		$updateHak = "UPDATE table_employee SET remaining_leave=remaining_leave + $hak_cuti_tahunan WHERE id_number='$id_number'";
 		$query = mysqli_query($con, $updateHak);
+
+		$insertHistory = "
+			INSERT INTO table_history_append(date_append, actor, note, leave_append, employee) 
+			VALUES('$tgl','$actor','$note','$hak_cuti_tahunan','$id_number')
+		";
+		$inputHistory = mysqli_query($con, $insertHistory);
 		
-		if($query){
+		if($query && $inputHistory){
 			echo "<div class='register-logo'><b>Input Data</b> Successful!</div>	
 				<div class='register-box-body'>
 					<p>Input Data Cuti Tahunan Berhasil.</p>
